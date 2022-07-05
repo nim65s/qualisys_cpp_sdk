@@ -3,6 +3,8 @@ project(qualisys_cpp_sdk)
 
 option(BUILD_EXAMPLES "Build examples" OFF)
 
+include(GNUInstallDirs)
+
 add_library(${PROJECT_NAME}
         Markup.cpp
         Network.cpp
@@ -29,7 +31,6 @@ set_target_properties(${PROJECT_NAME}
 
 # ----------- INSTALL & EXPORT -----------
 
-include(GNUInstallDirs)
 
 set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME})
 
