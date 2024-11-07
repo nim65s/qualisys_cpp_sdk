@@ -5,11 +5,21 @@ include(GNUInstallDirs)
 
 option(BUILD_EXAMPLES "Build examples" OFF)
 
-add_library(${PROJECT_NAME}
+set(SOURCES
         Markup.cpp
         Network.cpp
         RTPacket.cpp
         RTProtocol.cpp
+)
+set(HEADERS
+        Markup.h
+        Network.h
+        RTPacket.h
+        RTProtocol.h
+)
+
+add_library(${PROJECT_NAME}
+    ${SOURCES} ${HEADERS}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -61,10 +71,9 @@ install(
 )
 
 # Copy along headers
-set(INSTALL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
 install(
-        CODE "file( GLOB HEADERS \"${CMAKE_CURRENT_SOURCE_DIR}/*.h*\" )"
-        CODE "file( INSTALL \${HEADERS} DESTINATION \"${INSTALL_INCLUDE_DIR}\" )"
+        FILES ${HEADERS}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
 )
 
 # ----------- EXAMPLES -----------
